@@ -7,62 +7,62 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         loadedEvents: [
-            {
-              imageUrl: 'https://via.placeholder.com/1200x600/c44052/FFFFFF',
-              id: 'aaa', 
-              date: new Date(),
-              title: 'Some event',
-              location: 'NY',
-              description: 'Some event in NY'
-            },
-            {
-              imageUrl: 'https://via.placeholder.com/1200x600/f46242/FFFFFF',
-              id: 'aab', 
-              date: new Date(), 
-              title: 'Some event',
-              location: 'Paris',
-              description: 'Some event in Paris'
-            },
-            { 
-              imageUrl: 'https://via.placeholder.com/1200x600/f4be41/FFFFFF', 
-              id: 'aac', 
-              date: new Date(), 
-              title: 'Some event',
-              location: 'London',
-              description: 'Some event in London'
-            },
-            { 
-              imageUrl: 'https://via.placeholder.com/1200x600/206d39/FFFFFF', 
-              id: 'aad', 
-              date: new Date(), 
-              title: 'Some event', 
-              location: 'Madrid',
-              description: 'Some event in Madrid'
-            },
-            { 
-              imageUrl: 'https://via.placeholder.com/1200x600/257889/FFFFFF', 
-              id: 'aae', 
-              date: new Date(), 
-              title: 'Some event',
-              location: 'Moscow',
-              description: 'Some event in Moscow'
-            },
-            { 
-              imageUrl: 'https://via.placeholder.com/1200x600/243c6d/FFFFFF', 
-              id: 'aaf', 
-              date: new Date(), 
-              title: 'Some event',
-              location: 'Saint Petersburg',
-              description: 'Some event in Saint Petersburg'
-            },
-            { 
-              imageUrl: 'https://via.placeholder.com/1200x600/6621af/FFFFFF', 
-              id: 'aag', 
-              date: new Date(), 
-              title: 'Some event', 
-              location: 'Kazan',
-              description: 'Some event in Kazan'
-            }
+            // {
+            //   imageUrl: 'https://via.placeholder.com/1200x600/c44052/FFFFFF',
+            //   id: 'aaa', 
+            //   date: new Date(),
+            //   title: 'Some event',
+            //   location: 'NY',
+            //   description: 'Some event in NY'
+            // },
+            // {
+            //   imageUrl: 'https://via.placeholder.com/1200x600/f46242/FFFFFF',
+            //   id: 'aab', 
+            //   date: new Date(), 
+            //   title: 'Some event',
+            //   location: 'Paris',
+            //   description: 'Some event in Paris'
+            // },
+            // { 
+            //   imageUrl: 'https://via.placeholder.com/1200x600/f4be41/FFFFFF', 
+            //   id: 'aac', 
+            //   date: new Date(), 
+            //   title: 'Some event',
+            //   location: 'London',
+            //   description: 'Some event in London'
+            // },
+            // { 
+            //   imageUrl: 'https://via.placeholder.com/1200x600/206d39/FFFFFF', 
+            //   id: 'aad', 
+            //   date: new Date(), 
+            //   title: 'Some event', 
+            //   location: 'Madrid',
+            //   description: 'Some event in Madrid'
+            // },
+            // { 
+            //   imageUrl: 'https://via.placeholder.com/1200x600/257889/FFFFFF', 
+            //   id: 'aae', 
+            //   date: new Date(), 
+            //   title: 'Some event',
+            //   location: 'Moscow',
+            //   description: 'Some event in Moscow'
+            // },
+            // { 
+            //   imageUrl: 'https://via.placeholder.com/1200x600/243c6d/FFFFFF', 
+            //   id: 'aaf', 
+            //   date: new Date(), 
+            //   title: 'Some event',
+            //   location: 'Saint Petersburg',
+            //   description: 'Some event in Saint Petersburg'
+            // },
+            // { 
+            //   imageUrl: 'https://via.placeholder.com/1200x600/6621af/FFFFFF', 
+            //   id: 'aag', 
+            //   date: new Date(), 
+            //   title: 'Some event', 
+            //   location: 'Kazan',
+            //   description: 'Some event in Kazan'
+            // }
         ],
         user: null,
         loading: false,
@@ -104,7 +104,8 @@ export const store = new Vuex.Store({
                   title: obj[key].title,
                   description: obj[key].description,
                   imageUrl: obj[key].imageUrl,
-                  date: obj[key].date
+                  date: obj[key].date,
+                  creatorId: obj[key].creatorId
                 })
               }
               commit('setLoading', false)
@@ -115,13 +116,14 @@ export const store = new Vuex.Store({
               commit('setLoading', true)
             })
         },
-        createEvent ({commit}, payload) {
+        createEvent ({commit, getters}, payload) {
           const event = {
             title: payload.title,
             location: payload.location,
             imageUrl: payload.imageUrl,
             description: payload.description,
-            date: payload.date.toISOString()
+            date: payload.date.toISOString(),
+            creatorId: getters.user.id
           }
           firebase.database().ref('events').push(event)
               .then((data) => {
@@ -156,6 +158,18 @@ export const store = new Vuex.Store({
                 commit('setError', error)
               }
             )
+        },
+        autoSignIn ({commit}, payload) {
+          commit ('setUser', {id: payload.uid, registeredEvents: []})
+        },
+
+        logout ({commit}) {
+          firebase.auth().signOut()
+          commit ('setUser', null)
+        },
+
+        clearError ({commit}) {
+          commit('clearError')
         },
 
         signUserIn ({commit}, payload) {

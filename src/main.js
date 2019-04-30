@@ -29,6 +29,11 @@ new Vue({
       storageBucket: 'eventorginiser-2524f.appspot.com',
       messagingSenderId: '515426615303'
     })
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.dispatch ('autoSignIn', user)
+      }
+    })
     this.$store.dispatch('loadEvents')
   }
 })
