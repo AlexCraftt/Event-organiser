@@ -69,6 +69,9 @@ export const store = new Vuex.Store({
         error: null
     },
     mutations: {
+        setLoadedEvents (state, payload) {
+          state.loadedEvents = payload
+        },
         createEvent (state, payload) {
           state.loadedEvents.push(payload)
         },
@@ -90,17 +93,47 @@ export const store = new Vuex.Store({
         }
       },
       actions: {
+        loadEvents ({commit}) {
+          firebase.database().ref('events').once('value')
+            .then((data) => {
+              const events = []
+              const obj = data.val()
+              for (let key in obj) {
+                events.push({
+                  id: key,
+                  title: obj[key].title,
+                  description: obj[key].description,
+                  imageUrl: obj[key].imageUrl,
+                  date: obj[key].date
+                })
+              }
+              commit('setLoading', false)
+              commit('setLoadedEvents', events)
+            })
+            .catch((error) => {
+              console.log(error)
+              commit('setLoading', true)
+            })
+        },
         createEvent ({commit}, payload) {
           const event = {
             title: payload.title,
             location: payload.location,
             imageUrl: payload.imageUrl,
             description: payload.description,
-            date: payload.date,
-            id: 'kfdlsfjslakl12'
+            date: payload.date.toISOString()
           }
-          // Reach out to firebase and store it
-          commit('createEvent', event)
+          firebase.database().ref('events').push(event)
+              .then((data) => {
+                const key = data.key
+                commit('createEvent', {
+                  ...event,
+                  id: key
+                })
+              })
+              .catch((error) => {
+                console.log(error)
+          })
         },
 
         signUserUp ({commit}, payload) {

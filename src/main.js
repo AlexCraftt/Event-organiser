@@ -29,5 +29,6 @@ new Vue({
       storageBucket: 'eventorginiser-2524f.appspot.com',
       messagingSenderId: '515426615303'
     })
+    this.$store.dispatch('loadEvents')
   }
 })

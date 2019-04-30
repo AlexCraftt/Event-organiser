@@ -10,32 +10,32 @@
         <form @submit.prevent="onCreateEvent">
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-text-field
+              <v-textarea
                 name="title"
                 label="Название события"
                 id="title"
                 v-model="title"
-                required></v-text-field>
+                required></v-textarea>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-text-field
+              <v-textarea
                 name="location"
                 label="Место"
                 id="location"
                 v-model="location"
-                required></v-text-field>
+                required></v-textarea>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-text-field
+              <v-textarea
                 name="imageUrl"
                 label="Image URL"
                 id="image-url"
                 v-model="imageUrl"
-                required></v-text-field>
+                required></v-textarea>
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -45,13 +45,13 @@
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-text-field
+              <v-textarea
                 name="description"
                 label="Описание"
                 id="description"
                 multi-line
                 v-model="description"
-                required></v-text-field>
+                required></v-textarea>
             </v-flex>
           </v-layout>
           <v-layout row>
