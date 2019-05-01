@@ -22,12 +22,11 @@ new Vue({
   render: h => h(App),
   created () {
     firebase.initializeApp({
-      apiKey: 'AIzaSyAtLDRTFlqI89is3YeBRQchwtLwnhFEKSQ',
-      authDomain: 'eventorginiser-2524f.firebaseapp.com',
-      databaseURL: 'https://eventorginiser-2524f.firebaseio.com',
-      projectId: 'eventorginiser-2524f',
-      storageBucket: 'eventorginiser-2524f.appspot.com',
-      messagingSenderId: '515426615303'
+      apiKey: "AIzaSyAtLDRTFlqI89is3YeBRQchwtLwnhFEKSQ",
+      authDomain: "eventorginiser-2524f.firebaseapp.com",
+      databaseURL: "https://eventorginiser-2524f.firebaseio.com",
+      projectId: "eventorginiser-2524f",
+      storageBucket: "eventorginiser-2524f.appspot.com"
     })
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {

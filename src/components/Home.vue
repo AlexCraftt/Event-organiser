@@ -14,7 +14,7 @@
         indeterminate 
         class="primary--text" 
         :width="7" 
-        :size="70" 
+        :size="50" 
         v-if="loading"></v-progress-circular>
       </v-flex>
     </v-layout>

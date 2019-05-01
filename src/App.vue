@@ -80,7 +80,7 @@
     },
     methods: {
       onLogout () {
-        this.store.dispatch('logout')
+        this.$store.dispatch('logout')
       }
     }
   }
