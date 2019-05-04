@@ -2,17 +2,17 @@
   <v-container>
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
-        <div id="create-new-event">Создание нового события</div>
+        <h4>Добавить событие</h4>
       </v-flex>
     </v-layout>
     <v-layout row>
       <v-flex xs12>
-        <form @submit.prevent="onCreateEvent">
+        <form @submit.prevent="onCreateEVNT">
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
               <v-text-field
                 name="title"
-                label="Название события"
+                label="Название"
                 id="title"
                 v-model="title"
                 required></v-text-field>
@@ -22,7 +22,7 @@
             <v-flex xs12 sm6 offset-sm3>
               <v-text-field
                 name="location"
-                label="Место"
+                label="Место события"
                 id="location"
                 v-model="location"
                 required></v-text-field>
@@ -30,13 +30,13 @@
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-btn raised large class="primary" @click="onPickFile">Загрузить изображение</v-btn>
-              <input 
-              type="file" 
-              style="display: none" 
-              ref="fileInput" 
-              accept="image/*" 
-              @change="onFilePicked">
+              <v-btn raised class="primary" @click="onPickFile">Загрузить изображение</v-btn>
+              <input
+                type="file"
+                style="display: none"
+                ref="fileInput"
+                accept="image/*"
+                @change="onFilePicked">
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -46,13 +46,13 @@
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-textarea
+              <v-text-field
                 name="description"
                 label="Описание"
                 id="description"
                 multi-line
                 v-model="description"
-                required></v-textarea>
+                required></v-text-field>
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -75,7 +75,7 @@
               <v-btn
                 class="primary"
                 :disabled="!formIsValid"
-                type="submit">Добавить событие</v-btn>
+                type="submit">Создать событие</v-btn>
             </v-flex>
           </v-layout>
         </form>
@@ -93,8 +93,7 @@
         imageUrl: '',
         description: '',
         date: '',
-        time: new Date(),
-        image: null
+        time: new Date()
       }
     },
     computed: {
@@ -119,21 +118,18 @@
       }
     },
     methods: {
-      onCreateEvent () {
+      onCreateEVNT () {
         if (!this.formIsValid) {
           return
         }
-        if (!this.image) {
-          return
-        }
-        const eventData = {
+        const EVNTData = {
           title: this.title,
           location: this.location,
-          image: this.image,
+          imageUrl: this.imageUrl,
           description: this.description,
           date: this.submittableDateTime
         }
-        this.$store.dispatch('createEvent', eventData)
+        this.$store.dispatch('createEVNT', EVNTData)
         this.$router.push('/events')
       },
       onPickFile () {
@@ -143,7 +139,7 @@
         const files = event.target.files
         let filename = files[0].name
         if (filename.lastIndexOf('.') <= 0) {
-          return alert('Сожалеем, но формат файла не поддерживается!')
+          return alert('Сожалеем, но этот файл не подходит!')
         }
         const fileReader = new FileReader()
         fileReader.addEventListener('load', () => {
@@ -155,10 +151,3 @@
     }
   }
 </script>
-
-<style scoped>
-    #create-new-event {
-        font-size: 2.4em;
-        color: gray;
-    }
-</style>

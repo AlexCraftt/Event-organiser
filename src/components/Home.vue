@@ -22,12 +22,12 @@
       <v-flex xs12>
         <v-carousel style="cursor: pointer;">
           <v-carousel-item
-            v-for="event in events"
-            :src="event.imageUrl"
-            :key="event.id"
-            @click="onLoadEvent(event.id)">
+            v-for="EVNT in EVNTs"
+            :src="EVNT.imageUrl"
+            :key="EVNT.id"
+            @click="onLoadEVNT(EVNT.id)">
             <div class="title">
-              {{ event.title }}
+              {{ EVNT.title }}
             </div>
           </v-carousel-item>
         </v-carousel>
@@ -44,15 +44,15 @@
 <script>
   export default {
     computed: {
-      events () {
-        return this.$store.getters.featuredEvents
+      EVNTs () {
+        return this.$store.getters.featuredEVNTs
       },
       loading () {
         return this.$store.getters.loading
       }
     },
     methods: {
-      onLoadEvent (id) {
+      onLoadEVNT (id) {
         this.$router.push('/events/' + id)
       }
     }

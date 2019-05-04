@@ -7,12 +7,14 @@ import { store } from './store'
 import DateFilter from './filters/date'
 import Alert from './components/Shared/Alert'
 import 'vuetify/dist/vuetify.min.css'
+import EditEventDetailsDialog from './components/Event/Edit/EditEventDetailsDialog'
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)
 
 Vue.filter('date', DateFilter)
 Vue.component('app-alert', Alert)
+Vue.component('app-edit-event-details-dialog', EditEventDetailsDialog)
 
 /* eslint-disable no-new */
 new Vue({
@@ -33,6 +35,6 @@ new Vue({
         this.$store.dispatch ('autoSignIn', user)
       }
     })
-    this.$store.dispatch('loadEvents')
+    this.$store.dispatch('loadEVNTs')
   }
 })
