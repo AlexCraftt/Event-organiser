@@ -2,18 +2,18 @@
   <v-container>
     <v-layout row wrap v-if="loading">
       <v-flex xs12 class="text-xs-center">
-        <v-progress-circular
-          indeterminate
-          class="primary--text"
-          :width="7"
-          :size="70"></v-progress-circular>
+        <v-progress-circular 
+        indeterminate 
+        class="primary--text" 
+        :width="7" 
+        :size="50"></v-progress-circular>
       </v-flex>
     </v-layout>
     <v-layout row wrap v-else>
       <v-flex xs12>
         <v-card>
           <v-card-title>
-            <h6 class="primary--text">{{ EVNT.title }}</h6>
+            <div id="event-head" class="primary--text">{{ EVNT.title }}</div>
             <template v-if="userIsCreator">
               <v-spacer></v-spacer>
               <app-edit-event-details-dialog :EVNT="EVNT"></app-edit-event-details-dialog>
@@ -29,7 +29,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn class="primary">Register</v-btn>
+            <v-btn round large class="primary">Зарегистрироваться</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -59,3 +59,10 @@
     }
   }
 </script>
+
+<style scoped>
+  #event-head {
+    font-size: 1.6em;
+    font-style: initial;
+  }
+</style>

@@ -1,6 +1,6 @@
 <template>
-  <v-dialog width="350px" persistent v-model="editDialog">
-    <v-btn fab accent slot="activator">
+  <v-dialog width="600px" persistent v-model="editDialog">
+    <v-btn large fab accent slot="activator">
       <v-icon>edit</v-icon>
     </v-btn>
     <v-card>
@@ -34,11 +34,8 @@
         <v-layout row wrap>
           <v-flex xs12>
             <v-card-actions>
-              <v-btn
-                flat
-                class="blue--text darken-1"
-                @click="editDialog = false">Закрыть</v-btn>
-              <v-btn flat class="blue--text darken-1" @click="onSaveChanges">Сохранить</v-btn>
+              <v-btn round flat class="blue--text darken-1" @click="editDialog = false">Закрыть</v-btn>
+              <v-btn round flat class="blue--text darken-1" @click="onSaveChanges">Сохранить</v-btn>
             </v-card-actions>
           </v-flex>
         </v-layout>
@@ -63,7 +60,7 @@
           return
         }
         this.editDialog = false
-        this.$store.dispatch('updateEVNTData', {
+        this.$store.dispatch('updateEVNData', {
           id: this.EVNT.id,
           title: this.editedTitle,
           description: this.editedDescription

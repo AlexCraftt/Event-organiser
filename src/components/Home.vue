@@ -2,10 +2,10 @@
   <v-container>
     <v-layout row wrap>
       <v-flex xs12 sm6 class="text-xs-center text-sm-right">
-        <v-btn large router to="/events" class="info">Обзор событий</v-btn>
+        <v-btn round large router to="/events" class="info">Обзор событий</v-btn>
       </v-flex>
       <v-flex xs12 sm6 class="text-xs-center text-sm-left">
-        <v-btn large router to="/event/new" class="info">Добавить событие</v-btn>
+        <v-btn round large router to="/event/new" class="info">Добавить событие</v-btn>
       </v-flex>
     </v-layout>
     <v-layout>

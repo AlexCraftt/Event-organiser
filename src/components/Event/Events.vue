@@ -19,7 +19,7 @@
                                     </div>
                                 </v-card-title>
                                 <v-card-actions>
-                                    <v-btn flat :to="'/events/' + EVNT.id">
+                                    <v-btn round flat :to="'/events/' + EVNT.id">
                                         <v-icon>arrow_forward</v-icon>
                                         Подробнее
                                     </v-btn>

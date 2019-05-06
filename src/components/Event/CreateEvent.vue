@@ -30,7 +30,7 @@
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-btn raised class="primary" @click="onPickFile">Загрузить изображение</v-btn>
+              <v-btn round large raised class="primary" @click="onPickFile">Загрузить изображение</v-btn>
               <input
                 type="file"
                 style="display: none"
@@ -73,6 +73,8 @@
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
               <v-btn
+                round 
+                large 
                 class="primary"
                 :disabled="!formIsValid"
                 type="submit">Создать событие</v-btn>

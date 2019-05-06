@@ -12,24 +12,46 @@ export const store = new Vuex.Store({
     error: null
   },
   mutations: {
+
     setLoadedEVNTs (state, payload) {
       state.loadedEVNTs = payload
     },
+
     createEVNT (state, payload) {
       state.loadedEVNTs.push(payload)
     },
+
+    updateEVNT (state, payload) {
+      const EVNT = state.loadedEVNTs.find(EVNT => {
+        return EVNT.id === payload.id
+      })
+      if (payload.title) {
+        EVNT.title = payload.title
+      }
+      if (payload.description) {
+        EVNT.description = payload.description
+      }
+      if (payload.date) {
+        EVNT.date = payload.date
+      }
+    },
+
     setUser (state, payload) {
       state.user = payload
     },
+
     setLoading (state, payload) {
       state.loading = payload
     },
+
     setError (state, payload) {
       state.error = payload
     },
+    
     clearError (state) {
       state.error = null
     }
+
   },
   actions: {
     loadEVNTs ({commit}) {
@@ -79,6 +101,30 @@ export const store = new Vuex.Store({
           console.log(error)
         })
     },
+
+    updateEVNData ({commit}, payload) {
+      commit ('setLoading', true)
+      const updateObj = {}
+      if (payload.title) {
+        updateObj.title = payload.title
+      }
+      if (payload.description) {
+        updateObj.description = payload.description
+      }
+      if (payload.date) {
+        updateObj.date = payload.date
+      }
+      firebase.database().ref('EVNTs').child(payload.id).update(updateObj)
+      .then (() =>{
+        commit ('setLoading', false)
+        commit ('updateEVNT', payload)
+      })
+      .catch (error => {
+        console.log(error)
+        commit('setLoading', false)
+      })
+    },
+
     signUserUp ({commit}, payload) {
       commit('setLoading', true)
       commit('clearError')
