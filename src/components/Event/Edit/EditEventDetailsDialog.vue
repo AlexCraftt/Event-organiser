@@ -34,8 +34,8 @@
         <v-layout row wrap>
           <v-flex xs12>
             <v-card-actions>
-              <v-btn round flat class="blue--text darken-1" @click="editDialog = false">Закрыть</v-btn>
-              <v-btn round flat class="blue--text darken-1" @click="onSaveChanges">Сохранить</v-btn>
+              <v-btn round large flat class="blue--text darken-1" @click="editDialog = false">Закрыть</v-btn>
+              <v-btn round large flat class="blue--text darken-1" @click="onSaveChanges">Сохранить</v-btn>
             </v-card-actions>
           </v-flex>
         </v-layout>

@@ -67,6 +67,7 @@ export const store = new Vuex.Store({
               description: obj[key].description,
               imageUrl: obj[key].imageUrl,
               date: obj[key].date,
+              location: obj[key].location,
               creatorId: obj[key].creatorId
             })
           }
@@ -102,7 +103,7 @@ export const store = new Vuex.Store({
         })
     },
 
-    updateEVNData ({commit}, payload) {
+    updateEVNTData ({commit}, payload) {
       commit ('setLoading', true)
       const updateObj = {}
       if (payload.title) {
