@@ -55,23 +55,18 @@
                 required></v-text-field>
             </v-flex>
           </v-layout>
-          <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
-              <h4>Выбор даты и времени</h4>
+          <v-layout justify-center row>
+            <v-flex xs12 sm5>
+              <v-date-picker full-width v-model="date"></v-date-picker>
             </v-flex>
           </v-layout>
-          <v-layout row class="mb-2">
-            <v-flex xs12 sm6 offset-sm3>
-              <v-date-picker v-model="date"></v-date-picker>
-            </v-flex>
-          </v-layout>
-          <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
-              <v-time-picker v-model="time" format="24hr"></v-time-picker>
+          <v-layout justify-center row>
+            <v-flex xs12 sm5>
+              <v-time-picker full-width v-model="time" format="24hr"></v-time-picker>
             </v-flex>
           </v-layout>
           <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm6>
               <v-btn
                 round 
                 large 

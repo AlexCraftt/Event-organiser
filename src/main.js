@@ -9,6 +9,7 @@ import Alert from './components/Shared/Alert'
 import 'vuetify/dist/vuetify.min.css'
 import EditEventDetailsDialog from './components/Event/Edit/EditEventDetailsDialog'
 import EditEventDateDialog from './components/Event/Edit/EditEventDateDialog'
+import EditEventTimeDialog from './components/Event/Edit/EditEventTimeDialog'
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)
@@ -17,6 +18,7 @@ Vue.filter('date', DateFilter)
 Vue.component('app-alert', Alert)
 Vue.component('app-edit-event-details-dialog', EditEventDetailsDialog)
 Vue.component('app-edit-event-date-dialog', EditEventDateDialog)
+Vue.component('app-edit-event-time-dialog', EditEventTimeDialog)
 
 /* eslint-disable no-new */
 new Vue({

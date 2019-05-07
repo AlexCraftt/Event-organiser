@@ -25,7 +25,10 @@
           ></v-card-media>
           <v-card-text>
             <div class="info--text">{{ EVNT.date | date }} - {{ EVNT.location }}</div>
-            <div><app-edit-event-date-dialog :EVNT='EVNT' v-if="userIsCreator"></app-edit-event-date-dialog></div>
+            <div>
+              <app-edit-event-date-dialog :EVNT='EVNT' v-if="userIsCreator"></app-edit-event-date-dialog>
+              <app-edit-event-time-dialog :EVNT='EVNT' v-if="userIsCreator"></app-edit-event-time-dialog>
+            </div>
             <div>{{ EVNT.description }}</div>
           </v-card-text>
           <v-card-actions>
