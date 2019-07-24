@@ -33,7 +33,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn round large class="primary mb-4 mr-4">Зарегистрироваться</v-btn>
+            <v-btn round large class="primary">Зарегистрироваться</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
