@@ -2,7 +2,6 @@
   <v-app>
     <v-navigation-drawer absolute temporary v-model="sideNav" class="hidden-md-and-up">
       <v-list>
-
         <v-list-tile v-for="item in menuItems" 
         :key="item.title" 
         :to="item.link">
@@ -11,7 +10,6 @@
           </v-list-tile-action>
           <v-list-tile-content>{{ item.title }}</v-list-tile-content>
         </v-list-tile>
-
         <v-list-tile v-if="userIsAuthentificated" @click="onLogout">
           <v-list-tile-action>
             <v-icon>exit_to_app</v-icon>
@@ -19,7 +17,6 @@
           <v-list-tile-content>Выйти</v-list-tile-content>
         </v-list-tile>
       </v-list>
-
     </v-navigation-drawer>
     <v-toolbar dark class="primary">
       <v-toolbar-side-icon
