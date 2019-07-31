@@ -12,16 +12,15 @@ export const store = new Vuex.Store({
     error: null
   },
   mutations: {
-
-    setLoadedEVNTs (state, payload) {
+    setLoadedEVNTs(state, payload) {
       state.loadedEVNTs = payload
     },
 
-    createEVNT (state, payload) {
+    createEVNT(state, payload) {
       state.loadedEVNTs.push(payload)
     },
 
-    updateEVNT (state, payload) {
+    updateEVNT(state, payload) {
       const EVNT = state.loadedEVNTs.find(EVNT => {
         return EVNT.id === payload.id
       })
@@ -36,28 +35,31 @@ export const store = new Vuex.Store({
       }
     },
 
-    setUser (state, payload) {
+    setUser(state, payload) {
       state.user = payload
     },
 
-    setLoading (state, payload) {
+    setLoading(state, payload) {
       state.loading = payload
     },
 
-    setError (state, payload) {
+    setError(state, payload) {
       state.error = payload
     },
-    
-    clearError (state) {
+
+    clearError(state) {
       state.error = null
     }
-
   },
+  
   actions: {
-    loadEVNTs ({commit}) {
+    loadEVNTs({ commit }) {
       commit('setLoading', true)
-      firebase.database().ref('EVNTs').once('value')
-        .then((data) => {
+      firebase
+        .database()
+        .ref('EVNTs')
+        .once('value')
+        .then(data => {
           const EVNTs = []
           const obj = data.val()
           for (let key in obj) {
@@ -74,14 +76,12 @@ export const store = new Vuex.Store({
           commit('setLoadedEVNTs', EVNTs)
           commit('setLoading', false)
         })
-        .catch(
-          (error) => {
-            console.log(error)
-            commit('setLoading', false)
-          }
-        )
+        .catch(error => {
+          console.log(error)
+          commit('setLoading', false)
+        })
     },
-    createEVNT ({commit, getters}, payload) {
+    createEVNT({ commit, getters }, payload) {
       const EVNT = {
         title: payload.title,
         location: payload.location,
@@ -90,21 +90,24 @@ export const store = new Vuex.Store({
         date: payload.date.toISOString(),
         creatorId: getters.user.id
       }
-      firebase.database().ref('EVNTs').push(EVNT)
-        .then((data) => {
+      firebase
+        .database()
+        .ref('EVNTs')
+        .push(EVNT)
+        .then(data => {
           const key = data.key
           commit('createEVNT', {
             ...EVNT,
             id: key
           })
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error)
         })
     },
 
-    updateEVNTData ({commit}, payload) {
-      commit ('setLoading', true)
+    updateEVNTData({ commit }, payload) {
+      commit('setLoading', true)
       const updateObj = {}
       if (payload.title) {
         updateObj.title = payload.title
@@ -115,95 +118,95 @@ export const store = new Vuex.Store({
       if (payload.date) {
         updateObj.date = payload.date
       }
-      firebase.database().ref('EVNTs').child(payload.id).update(updateObj)
-      .then (() =>{
-        commit ('setLoading', false)
-        commit ('updateEVNT', payload)
-      })
-      .catch (error => {
-        console.log(error)
-        commit('setLoading', false)
-      })
+      firebase
+        .database()
+        .ref('EVNTs')
+        .child(payload.id)
+        .update(updateObj)
+        .then(() => {
+          commit('setLoading', false)
+          commit('updateEVNT', payload)
+        })
+        .catch(error => {
+          console.log(error)
+          commit('setLoading', false)
+        })
     },
 
-    signUserUp ({commit}, payload) {
+    signUserUp({ commit }, payload) {
       commit('setLoading', true)
       commit('clearError')
-      firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
-        .then(
-          user => {
-            commit('setLoading', false)
-            const newUser = {
-              id: user.uid,
-              registeredEVNTs: []
-            }
-            commit('setUser', newUser)
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(payload.email, payload.password)
+        .then(user => {
+          commit('setLoading', false)
+          const newUser = {
+            id: user.uid,
+            registeredEVNTs: []
           }
-        )
-        .catch(
-          error => {
-            commit('setLoading', false)
-            commit('setError', error)
-            console.log(error)
-          }
-        )
+          commit('setUser', newUser)
+        })
+        .catch(error => {
+          commit('setLoading', false)
+          commit('setError', error)
+          console.log(error)
+        })
     },
-    signUserIn ({commit}, payload) {
+    signUserIn({ commit }, payload) {
       commit('setLoading', true)
       commit('clearError')
-      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
-        .then(
-          user => {
-            commit('setLoading', false)
-            const newUser = {
-              id: user.uid,
-              registeredEVNTs: []
-            }
-            commit('setUser', newUser)
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(payload.email, payload.password)
+        .then(user => {
+          commit('setLoading', false)
+          const newUser = {
+            id: user.uid,
+            registeredEVNTs: []
           }
-        )
-        .catch(
-          error => {
-            commit('setLoading', false)
-            commit('setError', error)
-            console.log(error)
-          }
-        )
+          commit('setUser', newUser)
+        })
+        .catch(error => {
+          commit('setLoading', false)
+          commit('setError', error)
+          console.log(error)
+        })
     },
-    autoSignIn ({commit}, payload) {
-      commit('setUser', {id: payload.uid, registeredEVNTs: []})
+    autoSignIn({ commit }, payload) {
+      commit('setUser', { id: payload.uid, registeredEVNTs: [] })
     },
-    logout ({commit}) {
+    logout({ commit }) {
       firebase.auth().signOut()
       commit('setUser', null)
     },
-    clearError ({commit}) {
+    clearError({ commit }) {
       commit('clearError')
     }
   },
   getters: {
-    loadedEVNTs (state) {
+    loadedEVNTs(state) {
       return state.loadedEVNTs.sort((EVNTA, EVNTB) => {
         return EVNTA.date > EVNTB.date
       })
     },
-    featuredEVNTs (state, getters) {
+    featuredEVNTs(state, getters) {
       return getters.loadedEVNTs.slice(0, 5)
     },
-    loadedEVNT (state) {
-      return (EVNTId) => {
-        return state.loadedEVNTs.find((EVNT) => {
+    loadedEVNT(state) {
+      return EVNTId => {
+        return state.loadedEVNTs.find(EVNT => {
           return EVNT.id === EVNTId
         })
       }
     },
-    user (state) {
+    user(state) {
       return state.user
     },
-    loading (state) {
+    loading(state) {
       return state.loading
     },
-    error (state) {
+    error(state) {
       return state.error
     }
   }

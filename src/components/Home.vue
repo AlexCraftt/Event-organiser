@@ -10,12 +10,13 @@
     </v-layout>
     <v-layout>
       <v-flex xs12 class="text-xs-center">
-        <v-progress-circular 
-        indeterminate 
-        class="primary--text" 
-        :width="7" 
-        :size="50" 
-        v-if="loading"></v-progress-circular>
+        <v-progress-circular
+          indeterminate
+          class="primary--text"
+          :width="7"
+          :size="50"
+          v-if="loading"
+        ></v-progress-circular>
       </v-flex>
     </v-layout>
     <v-layout row wrap class="mt-2" v-if="!loading">
@@ -25,45 +26,44 @@
             v-for="EVNT in EVNTs"
             :src="EVNT.imageUrl"
             :key="EVNT.id"
-            @click="onLoadEVNT(EVNT.id)">
-            <div class="title">
-              {{ EVNT.title }}
-            </div>
+            @click="onLoadEVNT(EVNT.id)"
+          >
+            <div class="title">{{ EVNT.title }}</div>
           </v-carousel-item>
         </v-carousel>
       </v-flex>
     </v-layout>
-    <v-layout row wrap  class="mt-2">
+    <v-layout row wrap class="mt-2">
       <v-flex xs12 class="text-xs-center">
-       <p>Присоединяйтесь, будет интересно!</p>
+        <p>Присоединяйтесь, будет интересно!</p>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-  export default {
-    computed: {
-      EVNTs () {
-        return this.$store.getters.featuredEVNTs
-      },
-      loading () {
-        return this.$store.getters.loading
-      }
+export default {
+  computed: {
+    EVNTs() {
+      return this.$store.getters.featuredEVNTs
     },
-    methods: {
-      onLoadEVNT (id) {
-        this.$router.push('/events/' + id)
-      }
+    loading() {
+      return this.$store.getters.loading
+    }
+  },
+  methods: {
+    onLoadEVNT(id) {
+      this.$router.push('/events/' + id)
     }
   }
+}
 </script>
 
 <style scoped>
-  .title {
-    position: absolute;
-    bottom: 50px;
-    color: white;
-    padding: 20px;
-  }
+.title {
+  position: absolute;
+  bottom: 50px;
+  color: white;
+  padding: 20px;
+}
 </style>

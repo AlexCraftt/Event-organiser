@@ -26,17 +26,17 @@ new Vue({
   router,
   store,
   render: h => h(App),
-  created () {
+  created() {
     firebase.initializeApp({
-      apiKey: "AIzaSyAtLDRTFlqI89is3YeBRQchwtLwnhFEKSQ",
-      authDomain: "eventorginiser-2524f.firebaseapp.com",
-      databaseURL: "https://eventorginiser-2524f.firebaseio.com",
-      projectId: "eventorginiser-2524f",
-      storageBucket: "eventorginiser-2524f.appspot.com"
+      apiKey: 'AIzaSyAtLDRTFlqI89is3YeBRQchwtLwnhFEKSQ',
+      authDomain: 'eventorginiser-2524f.firebaseapp.com',
+      databaseURL: 'https://eventorginiser-2524f.firebaseio.com',
+      projectId: 'eventorginiser-2524f',
+      storageBucket: 'eventorginiser-2524f.appspot.com'
     })
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.$store.dispatch ('autoSignIn', user)
+        this.$store.dispatch('autoSignIn', user)
       }
     })
     this.$store.dispatch('loadEVNTs')
