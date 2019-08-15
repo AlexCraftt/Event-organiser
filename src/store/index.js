@@ -51,7 +51,7 @@ export const store = new Vuex.Store({
       state.error = null
     }
   },
-  
+
   actions: {
     loadEVNTs({ commit }) {
       commit('setLoading', true)
@@ -105,7 +105,6 @@ export const store = new Vuex.Store({
           console.log(error)
         })
     },
-
     updateEVNTData({ commit }, payload) {
       commit('setLoading', true)
       const updateObj = {}

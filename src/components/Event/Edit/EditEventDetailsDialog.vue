@@ -62,7 +62,7 @@ export default {
         return
       }
       this.editDialog = false
-      this.$store.dispatch('updateEVNData', {
+      this.$store.dispatch('updateEVNTData', {
         id: this.EVNT.id,
         title: this.editedTitle,
         description: this.editedDescription
