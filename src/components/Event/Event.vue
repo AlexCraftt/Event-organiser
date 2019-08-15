@@ -9,13 +9,13 @@
       <v-flex xs12>
         <v-card>
           <v-card-title>
-            <div id="event-head" class="primary--text">{{ EVNT.title }}</div>
+            <div id="evnt-head" class="primary--text">{{ EVNT.title }}</div>
             <template v-if="userIsCreator">
               <v-spacer></v-spacer>
               <app-edit-event-details-dialog :EVNT="EVNT"></app-edit-event-details-dialog>
             </template>
           </v-card-title>
-          <v-card-media :src="EVNT.imageUrl" height="500px"></v-card-media>
+          <v-img :src="EVNT.imageUrl" height="500px"></v-img>
           <v-card-text>
             <div class="info--text">{{ EVNT.date | date }} - {{ EVNT.location }}</div>
             <div>
@@ -26,7 +26,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn round large class="primary">Зарегистрироваться</v-btn>
+            <app-event-register-dialog :EVNTId="EVNT.id"/>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -57,8 +57,8 @@ export default {
 }
 </script>
 
-<style scoped>
-#event-head {
+<style>
+#evnt-head {
   font-size: 1.6em;
   font-style: initial;
 }

@@ -10,6 +10,7 @@ import 'vuetify/dist/vuetify.min.css'
 import EditEventDetailsDialog from './components/Event/Edit/EditEventDetailsDialog'
 import EditEventDateDialog from './components/Event/Edit/EditEventDateDialog'
 import EditEventTimeDialog from './components/Event/Edit/EditEventTimeDialog'
+import RegisterDialog from './components/Event/Registration/RegisterDialog'
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)
@@ -19,6 +20,7 @@ Vue.component('app-alert', Alert)
 Vue.component('app-edit-event-details-dialog', EditEventDetailsDialog)
 Vue.component('app-edit-event-date-dialog', EditEventDateDialog)
 Vue.component('app-edit-event-time-dialog', EditEventTimeDialog)
+Vue.component('app-event-register-dialog', RegisterDialog)
 
 /* eslint-disable no-new */
 new Vue({
@@ -37,6 +39,7 @@ new Vue({
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.$store.dispatch('autoSignIn', user)
+        this.$store.dispatch('fetchUserData')
       }
     })
     this.$store.dispatch('loadEVNTs')
