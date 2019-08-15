@@ -26,7 +26,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <app-event-register-dialog :EVNTId="EVNT.id"/>
+            <app-event-register-dialog :EVNTId="EVNT.id"></app-event-register-dialog>
           </v-card-actions>
         </v-card>
       </v-flex>

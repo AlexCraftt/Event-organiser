@@ -2,24 +2,7 @@ import * as firebase from 'firebase'
 
 export default {
   state: {
-    loadedEVNTs: [
-      {
-        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg',
-        id: 'afajfjadfaadfa323',
-        title: 'EVNT in New York',
-        date: new Date(),
-        location: 'New York',
-        description: 'New York, New York!'
-      },
-      {
-        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Paris_-_Blick_vom_gro%C3%9Fen_Triumphbogen.jpg',
-        id: 'aadsfhbkhlk1241',
-        title: 'EVNT in Paris',
-        date: new Date(),
-        location: 'Paris',
-        description: 'It\'s Paris!'
-      }
-    ]
+    loadedEVNTs: []
   },
   mutations: {
     setLoadedEVNTs (state, payload) {
@@ -105,7 +88,6 @@ export default {
         .catch((error) => {
           console.log(error)
         })
-      // Reach out to firebase and store it
     },
     updateEVNTData ({commit}, payload) {
       commit('setLoading', true)
